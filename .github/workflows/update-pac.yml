@@ -1,12 +1,12 @@
 name: Daily proxy.pac Update
 
 permissions:
-  contents: write         # allow GITHUB_TOKEN to push changes
+  contents: write         # allow GITHUB_TOKEN to push commits :contentReference[oaicite:1]{index=1}
 
 on:
-  workflow_dispatch: {}   # enable “Run workflow” button
+  workflow_dispatch: {}   # enable the “Run workflow” button 
   schedule:
-    - cron: '0 0 * * *'   # daily at 00:00 UTC
+    - cron: '0 0 * * *'   # daily at 00:00 UTC :contentReference[oaicite:3]{index=3}
 
 jobs:
   build:
@@ -15,11 +15,11 @@ jobs:
     steps:
       # 1. Check out the repository
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3      # clones into $GITHUB_WORKSPACE :contentReference[oaicite:4]{index=4}
 
       # 2. Set up Python 3.x
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v4  # provisions Python :contentReference[oaicite:5]{index=5}
         with:
           python-version: '3.x'
 
@@ -27,28 +27,35 @@ jobs:
       - name: Install NumPy
         run: |
           python -m pip install --upgrade pip
-          pip install numpy
+          pip install numpy           # easylist_pac.py unconditionally imports numpy :contentReference[oaicite:6]{index=6}
 
-      # ─────────────── NEW PATCH STEP ───────────────
-      # 4. Define the missing user_agent variable so the script won’t fail
-      - name: Patch easylist_pac.py to set user_agent
-        run: |
-          sed -i "1i user_agent = 'Mozilla/5.0 (X11; Linux x86_64)'" easylist_pac.py
+      # 4. (Optional) enable debug logs
+      - name: Enable debug logs
+        run: echo "::add-mask::$ACTIONS_STEP_DEBUG"  # requires secret ACTIONS_STEP_DEBUG :contentReference[oaicite:7]{index=7}
 
-      # 5. Generate proxy.pac (*do not* abort on failure)
+      # 5. Generate proxy.pac in ~/Downloads
       - name: Generate proxy.pac
-        continue-on-error: true   # preserve your debug flow
+        continue-on-error: true       # preserve debug flow :contentReference[oaicite:8]{index=8}
         run: python easylist_pac.py -d . -moff
 
-      # 6. Debug: show Python errors and workspace contents
+      # ─────────────── NEW STEP ───────────────
+      # 6. Move proxy.pac from ~/Downloads into the workspace
+      - name: Move proxy.pac into workspace
+        run: |
+          if [ -f ~/Downloads/proxy.pac ]; then
+            mv ~/Downloads/proxy.pac .   # bring the file into $GITHUB_WORKSPACE 
+          else
+            echo "❌ proxy.pac not found in Downloads"
+          fi
+
+      # 7. Debug: list workspace contents
       - name: Debug workspace
         run: |
-          echo "📋 Python traceback (if any above) and listing workspace:"
           pwd
           ls -la
-          ls -R .
+          ls -R .                       # confirm proxy.pac is now here :contentReference[oaicite:10]{index=10}
 
-      # 7. Commit & push proxy.pac if it exists
+      # 8. Commit & push proxy.pac if it exists
       - name: Commit and push proxy.pac
         run: |
           if [ -f proxy.pac ]; then
@@ -56,7 +63,7 @@ jobs:
             git config user.email "github-actions[bot]@users.noreply.github.com"
             git add proxy.pac
             git diff --quiet || git commit -m "Automated daily proxy.pac update"
-            git push
+            git push                    # pushes via GITHUB_TOKEN with write permission :contentReference[oaicite:11]{index=11}
           else
             echo "❌ proxy.pac not found; nothing to commit"
           fi
