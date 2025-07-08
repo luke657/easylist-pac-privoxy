@@ -1,12 +1,12 @@
 name: Daily proxy.pac Update
 
 permissions:
-  contents: write         # allow GITHUB_TOKEN to push changes :contentReference[oaicite:5]{index=5}
+  contents: write         # allow GITHUB_TOKEN to push commits :contentReference[oaicite:4]{index=4}
 
 on:
-  workflow_dispatch: {}   # manual trigger button :contentReference[oaicite:6]{index=6}
+  workflow_dispatch: {}   # manual trigger button :contentReference[oaicite:5]{index=5}
   schedule:
-    - cron: '0 0 * * *'   # daily at 00:00 UTC :contentReference[oaicite:7]{index=7}
+    - cron: '0 0 * * *'   # daily at 00:00 UTC :contentReference[oaicite:6]{index=6}
 
 jobs:
   build:
@@ -17,7 +17,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # 2. Provision Python 3.x
+      # 2. Set up Python 3.x
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
@@ -27,19 +27,17 @@ jobs:
       - name: Install NumPy
         run: |
           python -m pip install --upgrade pip
-          pip install numpy           # easylist_pac.py unconditionally imports numpy :contentReference[oaicite:8]{index=8}
+          pip install numpy
 
-      # ─── PATCH: fix the early return bug ───
-      - name: Patch easylist_pac.py for PAC creation
-        run: |
-          sed -i '/return self\.parse_easylist_rules()/d' easylist_pac.py
-          sed -i "/parse_easylist_rules()/a\        self.create_pac_file()" easylist_pac.py
+      # ─── PATCH: Replace return with parse call ───
+      - name: Patch easylist_pac.py to enable PAC creation
+        run: sed -i "s/^return self\.parse_easylist_rules()/self.parse_easylist_rules()/" easylist_pac.py
 
-      # 4. Generate proxy.pac (downloads into current dir, skips extra rules)
+      # 4. Generate proxy.pac (download to current dir, skip extra rules)
       - name: Generate proxy.pac
         run: python easylist_pac.py -d . -moff
 
-      # 5. Move proxy.pac into workspace if script wrote to ~/Downloads
+      # 5. Move proxy.pac from ~/Downloads if needed
       - name: Move proxy.pac into workspace
         run: |
           if [ -f ~/Downloads/proxy.pac ]; then
@@ -49,8 +47,7 @@ jobs:
       # 6. Debug: list workspace contents
       - name: Debug workspace
         run: |
-          pwd
-          ls -la
+          echo "Workspace contents:"
           ls -R .
 
       # 7. Commit & push updated proxy.pac
@@ -63,5 +60,5 @@ jobs:
             git diff --quiet || git commit -m "Automated daily proxy.pac update"
             git push
           else
-            echo "❌ proxy.pac not found; nothing to commit"
+            echo "❌ proxy.pac not found; skipping commit"
           fi
