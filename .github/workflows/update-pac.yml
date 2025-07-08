@@ -1,38 +1,36 @@
 name: Daily proxy.pac Update
 
 on:
-  # Allow manual dispatch
-  workflow_dispatch:
-  # Runs every day at 00:00 UTC
+  workflow_dispatch:      # enable manual runs :contentReference[oaicite:6]{index=6}
   schedule:
-    - cron: '0 0 * * *'
+    - cron: '0 0 * * *'    # daily at 00:00 UTC on default branch :contentReference[oaicite:7]{index=7}
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Clone the repo
+      # 1. Clone the repository
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3      # clones your repo into the runner :contentReference[oaicite:8]{index=8}
 
       # 2. Set up Python 3.x
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v4  # provisions Python :contentReference[oaicite:9]{index=9}
         with:
           python-version: '3.x'
 
-      # 3. Install required Python packages
-      - name: Install dependencies
+      # 3. Install only NumPy (required)
+      - name: Install NumPy dependency
         run: |
           python -m pip install --upgrade pip
-          pip install numpy scipy scikit-learn matplotlib
+          pip install numpy           # required by easylist_pac.py :contentReference[oaicite:10]{index=10}
 
-      # 4. Generate proxy.pac
+      # 4. Generate the proxy.pac file
       - name: Generate proxy.pac
-        run: python easylist_pac.py
+        run: python easylist_pac.py   # downloads rules and writes proxy.pac :contentReference[oaicite:11]{index=11}
 
-      # 5. Commit & push changes
+      # 5. Commit & push updates
       - name: Commit and push proxy.pac
         run: |
           git config user.name "github-actions[bot]"
@@ -40,3 +38,4 @@ jobs:
           git add proxy.pac
           git diff --quiet || git commit -m "Automated daily proxy.pac update"
           git push
+          
