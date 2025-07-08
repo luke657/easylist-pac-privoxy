@@ -1,80 +1,65 @@
 name: Daily proxy.pac Update
 
 permissions:
-  contents: write        # allow GITHUB_TOKEN to push commits
+  # Allow the built-in GITHUB_TOKEN to commit proxy.pac
+  contents: write                                        
 
 on:
-  workflow_dispatch: {}  # manual trigger
+  # Manual trigger in the Actions UI :contentReference[oaicite:3]{index=3}
+  workflow_dispatch: {}                                  
+  # Scheduled run every day at 00:00 UTC :contentReference[oaicite:4]{index=4}
   schedule:
-    - cron: '0 0 * * *'  # daily at 00:00 UTC
+    - cron: '0 0 * * *'                                  
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Checkout
+      # 1. Clone your repository into the runner’s workspace :contentReference[oaicite:5]{index=5}
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # 2. Python
+      # 2. Install Python 3.x on the runner :contentReference[oaicite:6]{index=6}
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.x'
 
-      # 3. NumPy
+      # 3. Install NumPy (the only unconditional dependency) :contentReference[oaicite:7]{index=7}
       - name: Install NumPy
         run: |
           python -m pip install --upgrade pip
           pip install numpy
 
-      # 4. Patch easylist_pac.py so main() actually calls create_pac_file()
-      - name: Patch easylist_pac.py main block
+      # 4. Patch the script inline so it actually writes proxy.pac  
+      - name: Patch easylist_pac.py
         run: |
-          # Define user_agent if missing
-          grep -q "^user_agent =" easylist_pac.py \
-            || sed -i "1i user_agent = 'Mozilla/5.0 (X11; Linux x86_64)'" easylist_pac.py
+          # Define the missing user_agent header to avoid NameError
+          sed -i "1i user_agent = 'Mozilla/5.0 (X11; Linux x86_64)'" easylist_pac.py
+          # Remove premature return so create_pac_file() runs
+          sed -i "s/return self.parse_easylist_rules()/self.parse_easylist_rules()/g" easylist_pac.py
 
-          # Remove the existing __main__ block (and any trailing sys.exit)
-          sed -i '/if __name__ == "__main__":/,$d' easylist_pac.py
-
-          # Append a new __main__ that forces PAC creation
-          cat << 'EOF' >> easylist_pac.py
-if __name__ == "__main__":
-    pac = EasyListPAC()
-    pac.create_pac_file()
-    print("Generated proxy.pac at", os.path.join(pac.easylist_dir, 'proxy.pac'))
-EOF
-
-      # 5. Generate proxy.pac (*don’t* abort on failure—keep your debug flow)
+      # 5. Generate proxy.pac directly in the workspace (no Downloads dir)  
       - name: Generate proxy.pac
-        continue-on-error: true
         run: python easylist_pac.py -d . -moff
 
-      # 6. Move from ~/Downloads if still there
-      - name: Move proxy.pac into workspace
+      # 6. Debug: show that proxy.pac now exists (optional; can be removed once confirmed)  
+      - name: List workspace
         run: |
-          if [ -f ~/Downloads/proxy.pac ]; then
-            mv ~/Downloads/proxy.pac .
-          fi
-
-      # 7. Debug: list files so you can see proxy.pac
-      - name: Debug workspace
-        run: |
-          pwd
+          echo "Files in workspace:"
           ls -la
-          ls -R .
 
-      # 8. Commit & push if proxy.pac exists
-      - name: Commit and push proxy.pac
+      # 7. Commit **only** proxy.pac if it changed, skipping all other modifications  
+      - name: Commit proxy.pac if updated
         run: |
-          if [ -f proxy.pac ]; then
-            git config user.name "github-actions[bot]"
-            git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          # If proxy.pac differs from HEAD, commit & push it
+          if ! git diff --exit-code HEAD proxy.pac; then
             git add proxy.pac
-            git diff --quiet || git commit -m "Automated daily proxy.pac update"
+            git commit -m "Automated daily proxy.pac update"
             git push
           else
-            echo "❌ proxy.pac not found; nothing to commit"
+            echo "No changes in proxy.pac; nothing to commit."
           fi
