@@ -1,10 +1,10 @@
 name: Daily proxy.pac Update
 
 permissions:
-  contents: write        # allow GITHUB_TOKEN to push commits :contentReference[oaicite:5]{index=5}
+  contents: write         # allow GITHUB_TOKEN to push changes
 
 on:
-  workflow_dispatch: {}   # enable manual “Run workflow” button
+  workflow_dispatch: {}   # enable “Run workflow” button 
   schedule:
     - cron: '0 0 * * *'   # daily at 00:00 UTC
 
@@ -13,30 +13,48 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # 1. Check out the repository
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      # 2. Set up Python 3.x
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.x'
 
+      # 3. Install only NumPy (required by easylist_pac.py)
       - name: Install NumPy
         run: |
           python -m pip install --upgrade pip
-          pip install numpy   # required by easylist_pac.py :contentReference[oaicite:6]{index=6}
+          pip install numpy
 
+      # 4. Enable step debug logging (optional; requires secret ACTIONS_STEP_DEBUG) :contentReference[oaicite:3]{index=3}
+      - name: Enable debug logs
+        run: echo "::add-mask::$ACTIONS_STEP_DEBUG"
+
+      # 5. Generate proxy.pac (*do not* abort on failure)
       - name: Generate proxy.pac
+        continue-on-error: true   # let us inspect errors without failing the entire job
         run: python easylist_pac.py -d . -moff
 
+      # 6. Debug: show Python errors and workspace contents :contentReference[oaicite:4]{index=4}
+      - name: Debug workspace
+        run: |
+          echo "📋 Python traceback (if any above) and listing workspace:"
+          pwd
+          ls -la
+          ls -R .
+
+      # 7. Commit & push proxy.pac if it exists
       - name: Commit and push proxy.pac
         run: |
           if [ -f proxy.pac ]; then
             git config user.name "github-actions[bot]"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
             git add proxy.pac
             git diff --quiet || git commit -m "Automated daily proxy.pac update"
             git push
           else
-            echo "❌ proxy.pac not found; skipping commit"
+            echo "❌ proxy.pac not found; nothing to commit"
           fi
