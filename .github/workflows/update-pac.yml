@@ -1,59 +1,72 @@
 name: Daily proxy.pac Update
 
 permissions:
-  contents: write        # GITHUB_TOKEN precisa de write em contents :contentReference[oaicite:5]{index=5}
+  contents: write        # allow GITHUB_TOKEN to push commits
 
 on:
-  workflow_dispatch: {}  # habilita “Run workflow” no branch default :contentReference[oaicite:6]{index=6}
+  workflow_dispatch: {}  # manual trigger
   schedule:
-    - cron: '0 0 * * *'  # todo dia à meia-noite UTC :contentReference[oaicite:7]{index=7}
+    - cron: '0 0 * * *'  # daily at 00:00 UTC
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Clonar o repositório no GITHUB_WORKSPACE :contentReference[oaicite:8]{index=8}
+      # 1. Checkout
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # 2. Instalar Python 3.x
+      # 2. Python
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.x'
 
-      # 3. Instalar apenas NumPy (única dependência obrigatória) :contentReference[oaicite:9]{index=9}
+      # 3. NumPy
       - name: Install NumPy
         run: |
           python -m pip install --upgrade pip
           pip install numpy
 
-      # 4. Patch do script para corrigir NameError e o return prematuro
-      - name: Patch easylist_pac.py
+      # 4. Patch easylist_pac.py so main() actually calls create_pac_file()
+      - name: Patch easylist_pac.py main block
         run: |
-          sed -i "1i user_agent = 'Mozilla/5.0 (X11; Linux x86_64)'" easylist_pac.py
-          sed -i "s/return self.parse_easylist_rules()/self.parse_easylist_rules()/g" easylist_pac.py
+          # Define user_agent if missing
+          grep -q "^user_agent =" easylist_pac.py \
+            || sed -i "1i user_agent = 'Mozilla/5.0 (X11; Linux x86_64)'" easylist_pac.py
 
-      # 5. Gerar proxy.pac (não aborta em erro para fins de debug)
+          # Remove the existing __main__ block (and any trailing sys.exit)
+          sed -i '/if __name__ == "__main__":/,$d' easylist_pac.py
+
+          # Append a new __main__ that forces PAC creation
+          cat << 'EOF' >> easylist_pac.py
+if __name__ == "__main__":
+    pac = EasyListPAC()
+    pac.create_pac_file()
+    print("Generated proxy.pac at", os.path.join(pac.easylist_dir, 'proxy.pac'))
+EOF
+
+      # 5. Generate proxy.pac (*don’t* abort on failure—keep your debug flow)
       - name: Generate proxy.pac
         continue-on-error: true
         run: python easylist_pac.py -d . -moff
 
-      # 6. Mover proxy.pac de ~/Downloads para o workspace (se ainda estiver lá) :contentReference[oaicite:10]{index=10}
+      # 6. Move from ~/Downloads if still there
       - name: Move proxy.pac into workspace
         run: |
           if [ -f ~/Downloads/proxy.pac ]; then
             mv ~/Downloads/proxy.pac .
           fi
 
-      # 7. Debug: listar conteúdos do workspace para confirmar localização
+      # 7. Debug: list files so you can see proxy.pac
       - name: Debug workspace
         run: |
-          echo "Workspace is $GITHUB_WORKSPACE"
-          ls -la $GITHUB_WORKSPACE
+          pwd
+          ls -la
+          ls -R .
 
-      # 8. Commit & push apenas se proxy.pac existir no workspace
+      # 8. Commit & push if proxy.pac exists
       - name: Commit and push proxy.pac
         run: |
           if [ -f proxy.pac ]; then
