@@ -1,65 +1,64 @@
 name: Daily proxy.pac Update
 
 permissions:
-  # Allow the built-in GITHUB_TOKEN to commit proxy.pac
-  contents: write                                        
+  contents: write   # so GITHUB_TOKEN can push commits
 
 on:
-  # Manual trigger in the Actions UI :contentReference[oaicite:3]{index=3}
-  workflow_dispatch: {}                                  
-  # Scheduled run every day at 00:00 UTC :contentReference[oaicite:4]{index=4}
+  workflow_dispatch: {}     # manual “Run workflow” button
   schedule:
-    - cron: '0 0 * * *'                                  
+    - cron: '0 0 * * *'     # daily at 00:00 UTC
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Clone your repository into the runner’s workspace :contentReference[oaicite:5]{index=5}
+      # 1) Checkout your code
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # 2. Install Python 3.x on the runner :contentReference[oaicite:6]{index=6}
+      # 2) Install Python
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.x'
 
-      # 3. Install NumPy (the only unconditional dependency) :contentReference[oaicite:7]{index=7}
+      # 3) Install the one required dependency
       - name: Install NumPy
         run: |
           python -m pip install --upgrade pip
           pip install numpy
 
-      # 4. Patch the script inline so it actually writes proxy.pac  
+      # 4) Patch easylist_pac.py in-place so it actually generates proxy.pac
       - name: Patch easylist_pac.py
         run: |
-          # Define the missing user_agent header to avoid NameError
+          # a) define user_agent before any downloads
           sed -i "1i user_agent = 'Mozilla/5.0 (X11; Linux x86_64)'" easylist_pac.py
-          # Remove premature return so create_pac_file() runs
+          # b) ensure download-dir exists
+          sed -i "/self.easylist_dir =/a\        os.makedirs(self.easylist_dir, exist_ok=True)" easylist_pac.py
+          # c) remove the premature return so create_pac_file() gets called
           sed -i "s/return self.parse_easylist_rules()/self.parse_easylist_rules()/g" easylist_pac.py
 
-      # 5. Generate proxy.pac directly in the workspace (no Downloads dir)  
+      # 5) Generate proxy.pac right into the workspace
       - name: Generate proxy.pac
         run: python easylist_pac.py -d . -moff
 
-      # 6. Debug: show that proxy.pac now exists (optional; can be removed once confirmed)  
-      - name: List workspace
+      # 6) Show the workspace so you can verify proxy.pac was created
+      - name: Debug workspace
         run: |
-          echo "Files in workspace:"
-          ls -la
+          echo "Workspace contents:"
+          ls -la .
 
-      # 7. Commit **only** proxy.pac if it changed, skipping all other modifications  
-      - name: Commit proxy.pac if updated
+      # 7) Commit *only* proxy.pac if it changed
+      - name: Commit updated proxy.pac
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          # If proxy.pac differs from HEAD, commit & push it
+          # Stage and commit proxy.pac if and only if it differs from HEAD
           if ! git diff --exit-code HEAD proxy.pac; then
             git add proxy.pac
             git commit -m "Automated daily proxy.pac update"
             git push
           else
-            echo "No changes in proxy.pac; nothing to commit."
+            echo "No change in proxy.pac; skipping commit."
           fi
