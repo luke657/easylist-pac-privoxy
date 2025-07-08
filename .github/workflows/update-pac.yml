@@ -1,34 +1,65 @@
 name: Daily proxy.pac Update
 
 permissions:
-  contents: write         # allow GITHUB_TOKEN to push commits :contentReference[oaicite:4]{index=4}
+  contents: write  # permite push pelo GITHUB_TOKEN
 
 on:
-  workflow_dispatch: {}   # enables manual “Run workflow” button :contentReference[oaicite:5]{index=5}
+  workflow_dispatch: {}  # habilita o botão “Run workflow”
   schedule:
-    - cron: '0 0 * * *'   # daily at 00:00 UTC :contentReference[oaicite:6]{index=6}
+    - cron: '0 0 * * *'  # executa todo dia à 00:00 UTC
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
+      # 1. Clona o repositório
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      # 2. Provisiona Python 3.x
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.x'
 
+      # 3. Instala NumPy (única dependência obrigatória)
       - name: Install NumPy
         run: |
           python -m pip install --upgrade pip
-          pip install numpy    # required by easylist_pac.py :contentReference[oaicite:7]{index=7}
+          pip install numpy
 
+      # 4. (Opcional) debug logs
+      - name: Enable debug logs
+        run: echo "::add-mask::$ACTIONS_STEP_DEBUG"
+
+      # ── PATCH: remove o 'return' que impede a criação do PAC ──
+      - name: Patch easylist_pac.py to enable PAC creation
+        run: |
+          sed -i "/return self\.parse_easylist_rules()/d" easylist_pac.py
+
+      # 5. Gera o proxy.pac (sem abortar em caso de erro)
       - name: Generate proxy.pac
-        run: python easylist_pac.py -d . -moff -P proxy.pac
+        continue-on-error: true
+        run: python easylist_pac.py -d . -moff
 
+      # 6. Move o PAC de ~/Downloads para o workspace, se existir
+      - name: Move proxy.pac into workspace
+        run: |
+          if [ -f ~/Downloads/proxy.pac ]; then
+            mv ~/Downloads/proxy.pac .
+          else
+            echo "❌ proxy.pac not found in Downloads"
+          fi
+
+      # 7. Debug: lista conteúdo do workspace
+      - name: Debug workspace
+        run: |
+          pwd
+          ls -la
+          ls -R .
+
+      # 8. Commit & push do novo proxy.pac
       - name: Commit and push proxy.pac
         run: |
           if [ -f proxy.pac ]; then
