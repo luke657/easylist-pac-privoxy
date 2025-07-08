@@ -1,75 +1,56 @@
 name: Daily proxy.pac Update
 
 permissions:
-  contents: write
+  contents: write         # allow GITHUB_TOKEN to push commits :contentReference[oaicite:6]{index=6}
 
 on:
-  workflow_dispatch: {}
+  workflow_dispatch: {}   # enable “Run workflow” button :contentReference[oaicite:7]{index=7}
   schedule:
-    - cron: '0 0 * * *'
+    - cron: '0 0 * * *'   # daily at 00:00 UTC 
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Checkout
+      # 1. Check out the repository
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3      # clones into $GITHUB_WORKSPACE :contentReference[oaicite:9]{index=9}
 
-      # 2. Python 3.x
+      # 2. Set up Python 3.x
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v4  # provisions Python :contentReference[oaicite:10]{index=10}
         with:
           python-version: '3.x'
 
-      # 3. Install NumPy
+      # 3. Install only NumPy (required by easylist_pac.py)
       - name: Install NumPy
         run: |
           python -m pip install --upgrade pip
-          pip install numpy
+          pip install numpy           # easylist_pac.py unconditionally imports numpy :contentReference[oaicite:11]{index=11}
 
-      # 4a. Redirect default download-dir to '.' instead of '~/Downloads'
-      - name: Patch default download directory
+      # ───────────── NEW: Patch in user_agent ─────────────  
+      - name: Define user_agent in script
         run: |
-          sed -i "s|default='~/Downloads'|default='.'|" easylist_pac.py
+          sed -i "1i user_agent = 'Mozilla/5.0 (X11; Linux x86_64)'" easylist_pac.py
+        # ensures the NameError is resolved :contentReference[oaicite:12]{index=12}
 
-      # 4b. Remove early return so create_pac_file() executes
-      - name: Patch early return bug
-        run: |
-          sed -i "s/^return self\.parse_easylist_rules()/self.parse_easylist_rules()/" easylist_pac.py
-
-      # 5. Disable interactive plotting entirely
-      - name: Disable plt.show()
-        run: |
-          sed -i "/plt\.show()/d" easylist_pac.py
-
-      # 6. Generate proxy.pac into workspace
+      # 4. Generate proxy.pac (fail on error)
       - name: Generate proxy.pac
         run: python easylist_pac.py -d . -moff
+        # now writes ./proxy.pac correctly :contentReference[oaicite:13]{index=13}
 
-      # 7. Move any file from ~/Downloads into workspace
-      - name: Move proxy.pac into workspace
-        run: |
-          if [ -f ~/Downloads/proxy.pac ]; then
-            mv ~/Downloads/proxy.pac .
-          fi
-
-      # 8. Debug: confirm proxy.pac presence
+      # 5. Debug: list workspace contents (optional)
       - name: Debug workspace contents
         run: |
-          echo "Files in $(pwd):"
-          ls -R .
+          echo "Workspace root:" && pwd
+          ls -la
 
-      # 9. Commit & push if updated
+      # 6. Commit & push proxy.pac if updated
       - name: Commit and push proxy.pac
         run: |
-          if [ -f proxy.pac ]; then
-            git config user.name "github-actions[bot]"
-            git config user.email "github-actions[bot]@users.noreply.github.com"
-            git add proxy.pac
-            git diff --quiet || git commit -m "Automated daily proxy.pac update"
-            git push
-          else
-            echo "❌ proxy.pac not found; nothing to commit"
-          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add proxy.pac
+          git diff --quiet || git commit -m "Automated daily proxy.pac update"
+          git push                   # uses GITHUB_TOKEN with write permission :contentReference[oaicite:14]{index=14}
