@@ -40,6 +40,9 @@ jobs:
           # c) substituir np.int por int (removido no NumPy ≥1.24):
           sed -i "s/\bdtype=np\.int\b/dtype=int/g" easylist_pac.py
           sed -i "s/\bnp\.int\b/int/g" easylist_pac.py      # cobre usos diretos :contentReference[oaicite:8]{index=8}
+          # adicionar whitelists da App Store
+          sed -i "/good_da_host_exact = \\[/a\ \ \ \ 'apps.apple.com', 'itunes.apple.com', 'mzstatic.com', 'p-buy.itunes.apple.com', 'p32-buy.itunes.apple.com'," easylist_pac.py
+          sed -i "/good_da_host_regex = \\[/a\ \ \ \ 'p[\\\\w-]*\\.buy\\.itunes\\.apple\\.com', '.*\\.akamaiedge\\.net'," easylist_pac.py
 
       # 5) Gerar proxy.pac no diretório atual
       - name: Generate proxy.pac
