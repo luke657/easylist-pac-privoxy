@@ -4,7 +4,7 @@ permissions:
   contents: write         # allow GITHUB_TOKEN to push changes
 
 on:
-  workflow_dispatch: {}   # enable “Run workflow” button 
+  workflow_dispatch: {}   # enable “Run workflow” button
   schedule:
     - cron: '0 0 * * *'   # daily at 00:00 UTC
 
@@ -29,16 +29,18 @@ jobs:
           python -m pip install --upgrade pip
           pip install numpy
 
-      # 4. Enable step debug logging (optional; requires secret ACTIONS_STEP_DEBUG) :contentReference[oaicite:3]{index=3}
-      - name: Enable debug logs
-        run: echo "::add-mask::$ACTIONS_STEP_DEBUG"
+      # ─────────────── NEW PATCH STEP ───────────────
+      # 4. Define the missing user_agent variable so the script won’t fail
+      - name: Patch easylist_pac.py to set user_agent
+        run: |
+          sed -i "1i user_agent = 'Mozilla/5.0 (X11; Linux x86_64)'" easylist_pac.py
 
       # 5. Generate proxy.pac (*do not* abort on failure)
       - name: Generate proxy.pac
-        continue-on-error: true   # let us inspect errors without failing the entire job
+        continue-on-error: true   # preserve your debug flow
         run: python easylist_pac.py -d . -moff
 
-      # 6. Debug: show Python errors and workspace contents :contentReference[oaicite:4]{index=4}
+      # 6. Debug: show Python errors and workspace contents
       - name: Debug workspace
         run: |
           echo "📋 Python traceback (if any above) and listing workspace:"
