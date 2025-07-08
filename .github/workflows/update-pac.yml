@@ -1,8 +1,8 @@
 name: Daily proxy.pac Update
 
 on:
+  workflow_dispatch:
   schedule:
-    # Runs every day at 00:00 UTC (21:00 BRT)
     - cron: '0 0 * * *'  # POSIX cron syntax :contentReference[oaicite:11]{index=11}
 
 jobs:
