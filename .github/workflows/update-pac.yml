@@ -1,36 +1,38 @@
 name: Daily proxy.pac Update
 
 on:
+  # Allow manual dispatch
   workflow_dispatch:
+  # Runs every day at 00:00 UTC
   schedule:
-    - cron: '0 0 * * *'  # POSIX cron syntax :contentReference[oaicite:11]{index=11}
+    - cron: '0 0 * * *'
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Clone the repository
+      # 1. Clone the repo
       - name: Checkout repository
-        uses: actions/checkout@v3  # clones your code into $GITHUB_WORKSPACE :contentReference[oaicite:12]{index=12}
+        uses: actions/checkout@v3
 
       # 2. Set up Python 3.x
       - name: Set up Python
-        uses: actions/setup-python@v4  # installs Python on the runner :contentReference[oaicite:13]{index=13}
+        uses: actions/setup-python@v4
         with:
           python-version: '3.x'
 
-      # 3. Install Python dependencies
+      # 3. Install required Python packages
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          pip install numpy scipy scikit-learn matplotlib
 
-      # 4. Generate the proxy.pac file
+      # 4. Generate proxy.pac
       - name: Generate proxy.pac
         run: python easylist_pac.py
 
-      # 5. Commit and push changes
+      # 5. Commit & push changes
       - name: Commit and push proxy.pac
         run: |
           git config user.name "github-actions[bot]"
