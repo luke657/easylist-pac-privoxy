@@ -3,7 +3,7 @@
 // Copyright (C) 2017 by Steven T. Smith <steve dot t dot smith at gmail dot com>, GPL
 // https://github.com/essandess/easylist-pac-privoxy/
 //
-// PAC file created on Tue, 08 Jul 2025 16:55:57 GMT
+// PAC file created on Tue, 08 Jul 2025 18:51:03 GMT
 // Created with command: easylist_pac.py -d . -moff
 //
 // http://www.gnu.org/licenses/lgpl.txt
@@ -100,8 +100,13 @@ var blackhole = "PROXY " + blackhole_ip_port;
 // bad_da_host_exact == bad domain anchor with host/path type, exact matching with Object hash
 // bad_da_host_regex == bad domain anchor with host/path type, RegExp matching
 // 
-// 110 rules:
+// 115 rules:
 var good_da_host_exact_JSON = { "apple.com": null,
+"apps.apple.com": null,
+"itunes.apple.com": null,
+"mzstatic.com": null,
+"p-buy.itunes.apple.com": null,
+"p32-buy.itunes.apple.com": null,
 "albert.apple.com": null,
 "captive.apple.com": null,
 "gs.apple.com": null,
@@ -211,11 +216,11 @@ var good_da_host_exact_JSON = { "apple.com": null,
 "microsoft.com": null,
 "mozilla.com": null,
 "mozilla.org": null };
-var good_da_host_exact_flag = 110 > 0 ? true : false;  // test for non-zero number of rules
+var good_da_host_exact_flag = 115 > 0 ? true : false;  // test for non-zero number of rules
     
-// 4 rules as an efficient NFA RegExp:
-var good_da_host_regex_RegExp = /^(?:[\w-]+\.)*?(?:^(?:[\w-]+\.)*?push\.apple\.com[^\w.%-]|^(?:[\w-]+\.)*?itunes\.apple\.com[^\w.%-]|^(?:[\w-]+\.)*?apps\.apple\.com[^\w.%-]|^(?:[\w-]+\.)*?mzstatic\.com[^\w.%-])/i;
-var good_da_host_regex_flag = 4 > 0 ? true : false;  // test for non-zero number of rules
+// 5 rules as an efficient NFA RegExp:
+var good_da_host_regex_RegExp = /^(?:[\w-]+\.)*?(?:^(?:[\w-]+\.)*?push\.apple\.com[^\w.%-]|^(?:[\w-]+\.)*?itunes\.apple\.com[^\w.%-]|^(?:[\w-]+\.)*?apps\.apple\.com[^\w.%-]|^(?:[\w-]+\.)*?mzstatic\.com[^\w.%-]|p\[\w\-\](?=([\s\S]*?\.buy\.itunes\.apple\.com))\1)/i;
+var good_da_host_regex_flag = 5 > 0 ? true : false;  // test for non-zero number of rules
 
 // 0 rules:
 var good_da_hostpath_exact_JSON = {  };
