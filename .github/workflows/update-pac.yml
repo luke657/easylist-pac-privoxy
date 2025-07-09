@@ -1,74 +1,73 @@
 name: Daily proxy.pac Update
 
 permissions:
-  contents: write   # GITHUB_TOKEN pode gravar no repositório
+  contents: write   # GITHUB_TOKEN can write to the repository
 
 on:
-  workflow_dispatch: {}    # botão “Run workflow” manual  
+  workflow_dispatch: {}    # manual “Run workflow” button
   schedule:
-    - cron: '0 0 * * *'    # executa diariamente à meia-noite UTC
+    - cron: '0 0 * * *'    # runs daily at midnight UTC
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      # 1) Clonar o repositório
+      # 1) Clone the repository
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # 2) Provisionar Python 3.x
+      # 2) Set up Python 3.x
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.x'
 
-      # 3) Instalar NumPy (única dependência obrigatória)
+      # 3) Install dependencies
       - name: Install NumPy
         run: |
           python -m pip install --upgrade pip
-          pip install numpy      # necessário para easylist_pac.py :contentReference[oaicite:7]{index=7}
+          pip install numpy
 
-      # 4) Patch: corrigir script para ambiente de Actions
+      # 4) Patch easylist_pac.py for GitHub Actions
       - name: Patch easylist_pac.py
         run: |
-          +      # a) define a Linux UA *before* imports
-+      sed -i "1i user_agent = 'Mozilla/5.0 (X11; Linux x86_64)'" easylist_pac.py
-+
-+      # b) ensure download‐dir exists right after self.easylist_dir is set
-+      sed -i "/self.easylist_dir =/a\        os.makedirs(self.easylist_dir, exist_ok=True)" easylist_pac.py
-+
-+      # c) drop the early-return in __init__
-+      sed -i "s/return self.parse_easylist_rules()/self.parse_easylist_rules()/g" easylist_pac.py
-+
-+      # d) fix removed numpy aliases
-+      sed -i "s/\bdtype=np\.int\b/dtype=int/g" easylist_pac.py
-+      sed -i "s/\bnp\.int\b/int/g" easylist_pac.py
-+
-+      # e) insert App Store whitelists into the good_* arrays
-+      sed -i "/good_da_host_exact = \\[/a\    'apps.apple.com', 'itunes.apple.com', 'mzstatic.com', 'p-buy.itunes.apple.com', 'p32-buy.itunes.apple.com'," easylist_pac.py
-+      sed -i "/good_da_host_regex = \\[/a\    'p[\\\\w-]*\\\\.buy\\\\.itunes\\\\.apple\\\\.com', '.*\\\\.akamaiedge\\\\.net'," easylist_pac.py
+          # a) Define a Linux User-Agent before imports
+          sed -i "1i user_agent = 'Mozilla/5.0 (X11; Linux x86_64)'" easylist_pac.py
 
-      # 5) Gerar proxy.pac no diretório atual
+          # b) Ensure the download directory exists
+          sed -i "/self.easylist_dir =/a\        os.makedirs(self.easylist_dir, exist_ok=True)" easylist_pac.py
+
+          # c) Remove the premature return in __init__
+          sed -i "s/return self.parse_easylist_rules()/self.parse_easylist_rules()/g" easylist_pac.py
+
+          # d) Replace removed numpy aliases (`np.int` → `int`)
+          sed -i "s/\\bdtype=np\\.int\\b/dtype=int/g" easylist_pac.py
+          sed -i "s/\\bnp\\.int\\b/int/g" easylist_pac.py
+
+          # e) Append App Store whitelists
+          sed -i "/good_da_host_exact = \\[/a\    'apps.apple.com', 'itunes.apple.com', 'mzstatic.com', 'p-buy.itunes.apple.com', 'p32-buy.itunes.apple.com'," easylist_pac.py
+          sed -i "/good_da_host_regex = \\[/a\    'p[\\\\w-]*\\\\.buy\\\\.itunes\\\\.apple\\\\.com', '.*\\\\.akamaiedge\\\\.net'," easylist_pac.py
+
+      # 5) Generate proxy.pac in the workspace
       - name: Generate proxy.pac
-        run: python easylist_pac.py -d . -moff    # -d . usa o workspace em vez de ~/Downloads :contentReference[oaicite:9]{index=9}
+        run: python easylist_pac.py -d . -moff
 
-      # 6) Verificar que proxy.pac foi criado
+      # 6) List workspace contents for debugging
       - name: Debug workspace
         run: |
-          echo "Conteúdo do workspace:"
+          echo "Workspace contents:"
           ls -la .
 
-      # 7) Commit *apenas* proxy.pac se mudou
+      # 7) Commit only proxy.pac if it changed
       - name: Commit updated proxy.pac
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          # Se proxy.pac difere do HEAD, comita e faz push
-          if ! git diff --exit-code HEAD proxy.pac; then
+          if ! git diff --quiet HEAD proxy.pac; then
             git add proxy.pac
             git commit -m "Automated daily proxy.pac update"
             git push
           else
-            echo "Nenhuma alteração em proxy.pac; nada a commitar."
+            echo "No changes to proxy.pac; nothing to commit."
           fi
