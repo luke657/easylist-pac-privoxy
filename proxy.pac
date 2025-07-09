@@ -3,7 +3,7 @@
 // Copyright (C) 2017 by Steven T. Smith <steve dot t dot smith at gmail dot com>, GPL
 // https://github.com/essandess/easylist-pac-privoxy/
 //
-// PAC file created on Wed, 09 Jul 2025 01:56:09 GMT
+// PAC file created on Wed, 09 Jul 2025 03:22:52 GMT
 // Created with command: easylist_pac.py -d . -moff
 //
 // http://www.gnu.org/licenses/lgpl.txt
@@ -219,7 +219,7 @@ var good_da_host_exact_JSON = { "apple.com": null,
 var good_da_host_exact_flag = 115 > 0 ? true : false;  // test for non-zero number of rules
     
 // 5 rules as an efficient NFA RegExp:
-var good_da_host_regex_RegExp = /^(?:[\w-]+\.)*?(?:^(?:[\w-]+\.)*?push\.apple\.com[^\w.%-]|^(?:[\w-]+\.)*?itunes\.apple\.com[^\w.%-]|^(?:[\w-]+\.)*?apps\.apple\.com[^\w.%-]|^(?:[\w-]+\.)*?mzstatic\.com[^\w.%-]|p\[\w\-\](?=([\s\S]*?\.buy\.itunes\.apple\.com))\1)/i;
+var good_da_host_regex_RegExp = /^(?:[\w-]+\.)*?(?:^(?:[\w-]+\.)*?push\.apple\.com[^\w.%-]|^(?:[\w-]+\.)*?itunes\.apple\.com[^\w.%-]|^(?:[\w-]+\.)*?apps\.apple\.com[^\w.%-]|^(?:[\w-]+\.)*?mzstatic\.com[^\w.%-]|p\[\w\-\](?=([\s\S]*?\\.buy\\.itunes\\.apple\\.com))\1)/i;
 var good_da_host_regex_flag = 5 > 0 ? true : false;  // test for non-zero number of rules
 
 // 0 rules:
