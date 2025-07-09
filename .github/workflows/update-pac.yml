@@ -32,17 +32,22 @@ jobs:
       # 4) Patch: corrigir script para ambiente de Actions
       - name: Patch easylist_pac.py
         run: |
-          # a) definir user_agent e garantir download-dir existe:
-          sed -i "1i user_agent = 'Mozilla/5.0 (X11; Linux x86_64)'" easylist_pac.py
-          sed -i "/self.easylist_dir =/a\        os.makedirs(self.easylist_dir, exist_ok=True)" easylist_pac.py
-          # b) remover return prematuro:
-          sed -i "s/return self.parse_easylist_rules()/self.parse_easylist_rules()/g" easylist_pac.py
-          # c) substituir np.int por int (removido no NumPy ≥1.24):
-          sed -i "s/\bdtype=np\.int\b/dtype=int/g" easylist_pac.py
-          sed -i "s/\bnp\.int\b/int/g" easylist_pac.py      # cobre usos diretos :contentReference[oaicite:8]{index=8}
-          # adicionar whitelists da App Store
-          sed -i "/good_da_host_exact = \\[/a\ \ \ \ 'apps.apple.com', 'itunes.apple.com', 'mzstatic.com', 'p-buy.itunes.apple.com', 'p32-buy.itunes.apple.com'," easylist_pac.py
-          sed -i "/good_da_host_regex = \\[/a\ \ \ \ 'p[\\\\w-]*\\.buy\\.itunes\\.apple\\.com', '.*\\.akamaiedge\\.net'," easylist_pac.py
+          +      # a) define a Linux UA *before* imports
++      sed -i "1i user_agent = 'Mozilla/5.0 (X11; Linux x86_64)'" easylist_pac.py
++
++      # b) ensure download‐dir exists right after self.easylist_dir is set
++      sed -i "/self.easylist_dir =/a\        os.makedirs(self.easylist_dir, exist_ok=True)" easylist_pac.py
++
++      # c) drop the early-return in __init__
++      sed -i "s/return self.parse_easylist_rules()/self.parse_easylist_rules()/g" easylist_pac.py
++
++      # d) fix removed numpy aliases
++      sed -i "s/\bdtype=np\.int\b/dtype=int/g" easylist_pac.py
++      sed -i "s/\bnp\.int\b/int/g" easylist_pac.py
++
++      # e) insert App Store whitelists into the good_* arrays
++      sed -i "/good_da_host_exact = \\[/a\    'apps.apple.com', 'itunes.apple.com', 'mzstatic.com', 'p-buy.itunes.apple.com', 'p32-buy.itunes.apple.com'," easylist_pac.py
++      sed -i "/good_da_host_regex = \\[/a\    'p[\\\\w-]*\\\\.buy\\\\.itunes\\\\.apple\\\\.com', '.*\\\\.akamaiedge\\\\.net'," easylist_pac.py
 
       # 5) Gerar proxy.pac no diretório atual
       - name: Generate proxy.pac
