@@ -3,7 +3,7 @@
 // Copyright (C) 2017 by Steven T. Smith <steve dot t dot smith at gmail dot com>, GPL
 // https://github.com/essandess/easylist-pac-privoxy/
 //
-// PAC file created on Wed, 09 Jul 2025 03:22:52 GMT
+// PAC file created on Thu, 10 Jul 2025 01:43:07 GMT
 // Created with command: easylist_pac.py -d . -moff
 //
 // http://www.gnu.org/licenses/lgpl.txt
@@ -471,6 +471,7 @@ var bad_da_host_exact_JSON = { "api.facebook.com": null,
 "cookieconsent.dfikir.com": null,
 "cookiefirst.com": null,
 "cookieform.pl": null,
+"cookiehub.eu": null,
 "cookieinformation.com": null,
 "cookieinfoscript.com": null,
 "cookielab.dk": null,
@@ -2879,6 +2880,7 @@ var bad_da_host_exact_JSON = { "api.facebook.com": null,
 "perr.h-cdn.com": null,
 "pi.ispot.tv": null,
 "ping-admin.ru": null,
+"ping.fastsimon.com": null,
 "pix.hyj.mobi": null,
 "pix.revjet.com": null,
 "pix.speedbit.com": null,
@@ -4273,9 +4275,7 @@ var bad_da_host_exact_JSON = { "api.facebook.com": null,
 "a8.degicashop.com": null,
 "a8.dstation.jp": null,
 "a8.erasutamo.onlinestaff.jp": null,
-"a8.exetime.jp": null,
-"a8.form.run": null,
-"a8.freeconsultant.btcagent.jp": null };
+"a8.exetime.jp": null };
 var bad_da_host_exact_flag = 3999 > 0 ? true : false;  // test for non-zero number of rules
     
 // 6 rules as an efficient NFA RegExp:
