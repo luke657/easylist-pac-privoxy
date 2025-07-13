@@ -3,7 +3,7 @@
 // Copyright (C) 2017 by Steven T. Smith <steve dot t dot smith at gmail dot com>, GPL
 // https://github.com/essandess/easylist-pac-privoxy/
 //
-// PAC file created on Sat, 12 Jul 2025 01:45:52 GMT
+// PAC file created on Sun, 13 Jul 2025 01:53:17 GMT
 // Created with command: easylist_pac.py -d . -moff
 //
 // http://www.gnu.org/licenses/lgpl.txt
@@ -2661,6 +2661,7 @@ var bad_da_host_exact_JSON = { "api.facebook.com": null,
 "csi.gstatic.com": null,
 "csp-reporting.cloudflare.com": null,
 "ct.pinterest.com": null,
+"customers.xray-superpixel.com": null,
 "d.shareaholic.com": null,
 "dadi.technology": null,
 "dash.getsitecontrol.com": null,
@@ -3663,6 +3664,7 @@ var bad_da_host_exact_JSON = { "api.facebook.com": null,
 "stlog.d.dmkt-sp.jp": null,
 "stlog.dmarket.docomo.ne.jp": null,
 "sync.shinobi.jp": null,
+"t.adclr.jp": null,
 "t.adlpo.com": null,
 "t.blog.livedoor.jp": null,
 "trace.bluemonkey.jp": null,
@@ -4273,9 +4275,7 @@ var bad_da_host_exact_JSON = { "api.facebook.com": null,
 "a8.chuo-estate.net": null,
 "a8.classicalelf.shop": null,
 "a8.creativevillage.ne.jp": null,
-"a8.degicashop.com": null,
-"a8.dstation.jp": null,
-"a8.erasutamo.onlinestaff.jp": null };
+"a8.degicashop.com": null };
 var bad_da_host_exact_flag = 3999 > 0 ? true : false;  // test for non-zero number of rules
     
 // 6 rules as an efficient NFA RegExp:
