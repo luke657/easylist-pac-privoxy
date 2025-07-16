@@ -3,7 +3,7 @@
 // Copyright (C) 2017 by Steven T. Smith <steve dot t dot smith at gmail dot com>, GPL
 // https://github.com/essandess/easylist-pac-privoxy/
 //
-// PAC file created on Tue, 15 Jul 2025 01:49:24 GMT
+// PAC file created on Wed, 16 Jul 2025 01:45:58 GMT
 // Created with command: easylist_pac.py -d . -moff
 //
 // http://www.gnu.org/licenses/lgpl.txt
@@ -2748,6 +2748,7 @@ var bad_da_host_exact_JSON = { "api.facebook.com": null,
 "events.yourcx.io": null,
 "eventsproxy.gargantuan.futureplc.com": null,
 "experience.contextly.com": null,
+"experiments.parsely.com": null,
 "f-log-at.grammarly.io": null,
 "f-log-test.grammarly.io": null,
 "fcmatch.google.com": null,
@@ -3088,6 +3089,7 @@ var bad_da_host_exact_JSON = { "api.facebook.com": null,
 "tl.tradetracker.net": null,
 "tm.tradetracker.net": null,
 "top-fwz1.mail.ru": null,
+"tr-experiments.parsely.com": null,
 "tr-op.datatrics.com": null,
 "tr.cloud-media.fr": null,
 "tr.datatrics.com": null,
@@ -3229,6 +3231,7 @@ var bad_da_host_exact_JSON = { "api.facebook.com": null,
 "tracking.synthasite.net": null,
 "tracking.target2sell.com": null,
 "tracking.thehut.net": null,
+"tracking.upfluence.co": null,
 "tracking.waterfrontmedia.com": null,
 "tracking.wisepops.com": null,
 "tracking1.brandmentions.com": null,
@@ -4272,10 +4275,7 @@ var bad_da_host_exact_JSON = { "api.facebook.com": null,
 "a8.biziphone.com": null,
 "a8.brandcosme.com": null,
 "a8.brandkaimasu.com": null,
-"a8.buddyup.shop": null,
-"a8.chuo-estate.net": null,
-"a8.classicalelf.shop": null,
-"a8.creativevillage.ne.jp": null };
+"a8.buddyup.shop": null };
 var bad_da_host_exact_flag = 3999 > 0 ? true : false;  // test for non-zero number of rules
     
 // 6 rules as an efficient NFA RegExp:
