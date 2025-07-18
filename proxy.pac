@@ -3,7 +3,7 @@
 // Copyright (C) 2017 by Steven T. Smith <steve dot t dot smith at gmail dot com>, GPL
 // https://github.com/essandess/easylist-pac-privoxy/
 //
-// PAC file created on Thu, 17 Jul 2025 01:46:35 GMT
+// PAC file created on Fri, 18 Jul 2025 01:48:09 GMT
 // Created with command: easylist_pac.py -d . -moff
 //
 // http://www.gnu.org/licenses/lgpl.txt
@@ -725,6 +725,7 @@ var bad_da_host_exact_JSON = { "api.facebook.com": null,
 "sitecounter.site": null,
 "sitedataprocessing.com": null,
 "smartmetrics.co.uk": null,
+"spotlersearchanalytics.com": null,
 "srmdata-eur.com": null,
 "stat.ovh": null,
 "statisticplatform.com": null,
@@ -3889,6 +3890,7 @@ var bad_da_host_exact_JSON = { "api.facebook.com": null,
 "analytics.inquisitr.com": null,
 "analytics.kaggle.io": null,
 "analytics.komiku.org": null,
+"analytics.kurocore.com": null,
 "analytics.makeitmeme.com": null,
 "analytics.maxroll.gg": null,
 "analytics.ml.homedepot.ca": null,
@@ -4273,9 +4275,7 @@ var bad_da_host_exact_JSON = { "api.facebook.com": null,
 "a8.abemashopping.jp": null,
 "a8.arrrt-shop.com": null,
 "a8.biz.ne.jp": null,
-"a8.biziphone.com": null,
-"a8.brandcosme.com": null,
-"a8.brandkaimasu.com": null };
+"a8.biziphone.com": null };
 var bad_da_host_exact_flag = 3999 > 0 ? true : false;  // test for non-zero number of rules
     
 // 6 rules as an efficient NFA RegExp:
