@@ -3,7 +3,7 @@
 // Copyright (C) 2017 by Steven T. Smith <steve dot t dot smith at gmail dot com>, GPL
 // https://github.com/essandess/easylist-pac-privoxy/
 //
-// PAC file created on Sat, 26 Jul 2025 01:43:53 GMT
+// PAC file created on Sun, 27 Jul 2025 01:55:28 GMT
 // Created with command: easylist_pac.py -d . -moff
 //
 // http://www.gnu.org/licenses/lgpl.txt
@@ -1028,6 +1028,7 @@ var bad_da_host_exact_JSON = { "api.facebook.com": null,
 "datamind.ru": null,
 "dataperforma.com": null,
 "dataroid.com": null,
+"datastat.me": null,
 "datasteam.io": null,
 "dataunlocker.com": null,
 "dataxpand.com": null,
@@ -3731,6 +3732,7 @@ var bad_da_host_exact_JSON = { "api.facebook.com": null,
 "gke.econodata.com.br": null,
 "neurotrack.neurolake.io": null,
 "pixel.leadlovers.app": null,
+"scripts.dadata.com.br": null,
 "statistic.audima.co": null,
 "stats.gridmidia.com.br": null,
 "track.noddus.com": null,
@@ -4273,9 +4275,7 @@ var bad_da_host_exact_JSON = { "api.facebook.com": null,
 "ysrrzgku6tar.us.themoneytizer.com": null,
 "a8-affiliate.kase3535.com": null,
 "a8-wpxblog.secure.wpx.ne.jp": null,
-"a8-xshop.secure.xserver.ne.jp": null,
-"a8.01cloud.jp": null,
-"a8.abemashopping.jp": null };
+"a8-xshop.secure.xserver.ne.jp": null };
 var bad_da_host_exact_flag = 3999 > 0 ? true : false;  // test for non-zero number of rules
     
 // 6 rules as an efficient NFA RegExp:
