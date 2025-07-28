@@ -3,7 +3,7 @@
 // Copyright (C) 2017 by Steven T. Smith <steve dot t dot smith at gmail dot com>, GPL
 // https://github.com/essandess/easylist-pac-privoxy/
 //
-// PAC file created on Sun, 27 Jul 2025 01:55:28 GMT
+// PAC file created on Mon, 28 Jul 2025 01:53:28 GMT
 // Created with command: easylist_pac.py -d . -moff
 //
 // http://www.gnu.org/licenses/lgpl.txt
@@ -378,6 +378,7 @@ var bad_da_host_exact_JSON = { "api.facebook.com": null,
 "cdn.qgr.ph": null,
 "cdn.qgraph.io": null,
 "krakenoptimize.com": null,
+"my-pu.sh": null,
 "notification.tubecup.net": null,
 "notifstation.com": null,
 "popmechanic.ru": null,
@@ -2478,6 +2479,7 @@ var bad_da_host_exact_JSON = { "api.facebook.com": null,
 "analytics.kongregate.io": null,
 "analytics.lemoolah.com": null,
 "analytics.livestream.com": null,
+"analytics.loadweb.com": null,
 "analytics.logsss.com": null,
 "analytics.lunaweb.cloud": null,
 "analytics.m7g.twitch.tv": null,
@@ -3330,6 +3332,7 @@ var bad_da_host_exact_JSON = { "api.facebook.com": null,
 "d1ros97qkrwjf5.cloudfront.net": null,
 "d1t9uctetvi0tu.cloudfront.net": null,
 "d1tbj6eaenapdy.cloudfront.net": null,
+"d1tqsoh7s4xjz9.cloudfront.net": null,
 "d1vg5xiq7qffdj.cloudfront.net": null,
 "d1xfq2052q7thw.cloudfront.net": null,
 "d1z3r0i09bwium.cloudfront.net": null,
@@ -4272,10 +4275,7 @@ var bad_da_host_exact_JSON = { "api.facebook.com": null,
 "uhd5nn09mgml.fort-shop.kiev.ua": null,
 "umylynsr9b.quira.sh": null,
 "w38ju82bano4.cv.gerardbosch.xyz": null,
-"ysrrzgku6tar.us.themoneytizer.com": null,
-"a8-affiliate.kase3535.com": null,
-"a8-wpxblog.secure.wpx.ne.jp": null,
-"a8-xshop.secure.xserver.ne.jp": null };
+"ysrrzgku6tar.us.themoneytizer.com": null };
 var bad_da_host_exact_flag = 3999 > 0 ? true : false;  // test for non-zero number of rules
     
 // 6 rules as an efficient NFA RegExp:
