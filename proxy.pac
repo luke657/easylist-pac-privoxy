@@ -3,7 +3,7 @@
 // Copyright (C) 2017 by Steven T. Smith <steve dot t dot smith at gmail dot com>, GPL
 // https://github.com/essandess/easylist-pac-privoxy/
 //
-// PAC file created on Wed, 06 Aug 2025 01:50:20 GMT
+// PAC file created on Thu, 07 Aug 2025 01:50:43 GMT
 // Created with command: easylist_pac.py -d . -moff
 //
 // http://www.gnu.org/licenses/lgpl.txt
@@ -1780,6 +1780,7 @@ var bad_da_host_exact_JSON = { "api.facebook.com": null,
 "azurestealth.com": null,
 "bikesboard.com": null,
 "billowybead.com": null,
+"blitzcampaigns.com": null,
 "blushingbread.com": null,
 "boomboomcloud.com": null,
 "brandsfive.com": null,
@@ -2702,6 +2703,7 @@ var bad_da_host_exact_JSON = { "api.facebook.com": null,
 "ecommerce-events.adscale.com": null,
 "ecommstats.s3.amazonaws.com": null,
 "enc-90128738.b-cdn.net": null,
+"error-analytics-production.shopifysvc.com": null,
 "error-analytics-sessions-production.shopifysvc.com": null,
 "eu-mobile.events.data.microsoft.com": null,
 "ev.moneymade.io": null,
@@ -4273,9 +4275,7 @@ var bad_da_host_exact_JSON = { "api.facebook.com": null,
 "os270ojwwxtg.gameflow.tv": null,
 "q4l5gz6lqog6.www.eventus.io": null,
 "qnlbs2m0uoto.www.videoath.com": null,
-"t7baxp1xmw00.boxoffice.adventuretix.com": null,
-"ti3av8k3ikwm.resume.gerardbosch.xyz": null,
-"tnincvf1d1jl.de.themoneytizer.com": null };
+"t7baxp1xmw00.boxoffice.adventuretix.com": null };
 var bad_da_host_exact_flag = 3999 > 0 ? true : false;  // test for non-zero number of rules
     
 // 6 rules as an efficient NFA RegExp:
