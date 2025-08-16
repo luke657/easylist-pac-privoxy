@@ -3,7 +3,7 @@
 // Copyright (C) 2017 by Steven T. Smith <steve dot t dot smith at gmail dot com>, GPL
 // https://github.com/essandess/easylist-pac-privoxy/
 //
-// PAC file created on Fri, 15 Aug 2025 01:42:42 GMT
+// PAC file created on Sat, 16 Aug 2025 01:37:34 GMT
 // Created with command: easylist_pac.py -d . -moff
 //
 // http://www.gnu.org/licenses/lgpl.txt
@@ -2405,6 +2405,7 @@ var bad_da_host_exact_JSON = { "api.facebook.com": null,
 "analyticcdn.globalmailer.com": null,
 "analyticcdn.wlmediahub.com": null,
 "analytics-1.cavai.com": null,
+"analytics-api.gemcommerce.com": null,
 "analytics-api.klickly.com": null,
 "analytics-cf.bigcrunch.com": null,
 "analytics-cms.whitebeard.me": null,
@@ -3286,6 +3287,7 @@ var bad_da_host_exact_JSON = { "api.facebook.com": null,
 "win.staticstuff.net": null,
 "wl-pixel.index.digital": null,
 "wsmcdn.audioeye.com": null,
+"wstats.ageverif.com": null,
 "wstats.slashed.cloud": null,
 "wtbevents.pricespider.com": null,
 "wtr-digital-analytics.ew.r.appspot.com": null,
@@ -3476,6 +3478,7 @@ var bad_da_host_exact_JSON = { "api.facebook.com": null,
 "pixel.poptok.com": null,
 "px.staticfiles.at": null,
 "retrack.q-divisioncdn.de": null,
+"simetra.tracking.ringieraxelspringer.tech": null,
 "sp.data.funkedigital.de": null,
 "stat.clichehosting.de": null,
 "statistics.klicktel.de": null,
@@ -4272,10 +4275,7 @@ var bad_da_host_exact_JSON = { "api.facebook.com": null,
 "q4l5gz6lqog6.www.eventus.io": null,
 "qnlbs2m0uoto.www.videoath.com": null,
 "t7baxp1xmw00.boxoffice.adventuretix.com": null,
-"ti3av8k3ikwm.resume.gerardbosch.xyz": null,
-"tnincvf1d1jl.de.themoneytizer.com": null,
-"u0crsrah75fy.camberlion.com": null,
-"uhd5nn09mgml.fort-shop.kiev.ua": null };
+"ti3av8k3ikwm.resume.gerardbosch.xyz": null };
 var bad_da_host_exact_flag = 3999 > 0 ? true : false;  // test for non-zero number of rules
     
 // 6 rules as an efficient NFA RegExp:
