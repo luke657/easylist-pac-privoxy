@@ -3,7 +3,7 @@
 // Copyright (C) 2017 by Steven T. Smith <steve dot t dot smith at gmail dot com>, GPL
 // https://github.com/essandess/easylist-pac-privoxy/
 //
-// PAC file created on Sat, 23 Aug 2025 01:24:40 GMT
+// PAC file created on Sun, 24 Aug 2025 01:43:57 GMT
 // Created with command: easylist_pac.py -d . -moff
 //
 // http://www.gnu.org/licenses/lgpl.txt
@@ -4123,6 +4123,7 @@ var bad_da_host_exact_JSON = { "api.facebook.com": null,
 "rta.dailymail.co.uk": null,
 "s.gofile.io": null,
 "search.anonymous.ads.brave.com": null,
+"sherlock-events-sampler.ebay.com": null,
 "shopmetric.rediff.com": null,
 "sjc.cloud.optable.co": null,
 "slipstream.skyscanner.net": null,
@@ -4211,6 +4212,7 @@ var bad_da_host_exact_JSON = { "api.facebook.com": null,
 "tracking.shopstyle.co.uk": null,
 "tracking.shopstyle.com": null,
 "tracking.unrealengine.com": null,
+"tracking.wallapop.com": null,
 "trackr.vivenu.com": null,
 "ua.indianexpress.com": null,
 "ubt.tracking.shopee.": null,
@@ -4273,9 +4275,7 @@ var bad_da_host_exact_JSON = { "api.facebook.com": null,
 "jc917x3.adaptive.marketing": null,
 "jiktq0fr9hv6.meleton.ru": null,
 "kn81kivjwwc7.www.logology.co": null,
-"lofo3l15c674.platform.replai.io": null,
-"lv6od3a4sz12.www.logology.co": null,
-"n367tqpdxce0.quine.sh": null };
+"lofo3l15c674.platform.replai.io": null };
 var bad_da_host_exact_flag = 3999 > 0 ? true : false;  // test for non-zero number of rules
     
 // 6 rules as an efficient NFA RegExp:
