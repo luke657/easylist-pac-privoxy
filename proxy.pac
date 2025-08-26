@@ -3,7 +3,7 @@
 // Copyright (C) 2017 by Steven T. Smith <steve dot t dot smith at gmail dot com>, GPL
 // https://github.com/essandess/easylist-pac-privoxy/
 //
-// PAC file created on Mon, 25 Aug 2025 01:38:58 GMT
+// PAC file created on Tue, 26 Aug 2025 01:27:53 GMT
 // Created with command: easylist_pac.py -d . -moff
 //
 // http://www.gnu.org/licenses/lgpl.txt
@@ -325,6 +325,7 @@ var bad_da_host_exact_JSON = { "api.facebook.com": null,
 "rdstation.com.br": null,
 "sail-horizon.com": null,
 "sales-pop-dot-autoketing-production-sdk.appspot.com": null,
+"salespopup.io": null,
 "scorespro.com": null,
 "screenpopper.com": null,
 "sendsay.ru": null,
@@ -1335,6 +1336,7 @@ var bad_da_host_exact_JSON = { "api.facebook.com": null,
 "netclickstats.com": null,
 "newrelic.com": null,
 "nextstat.com": null,
+"nexx360-static.io": null,
 "northstartravelmedia.com": null,
 "notifyvisitors.com": null,
 "nr-data.net": null,
@@ -4273,9 +4275,7 @@ var bad_da_host_exact_JSON = { "api.facebook.com": null,
 "f02b61sgc617.es.themoneytizer.com": null,
 "hht8m6w8mnug.quine.sh": null,
 "ia84berzxy7v.de.themoneytizer.com": null,
-"iwl2d7pa4yx1.www.logology.co": null,
-"jc917x3.adaptive.marketing": null,
-"jiktq0fr9hv6.meleton.ru": null };
+"iwl2d7pa4yx1.www.logology.co": null };
 var bad_da_host_exact_flag = 3999 > 0 ? true : false;  // test for non-zero number of rules
     
 // 6 rules as an efficient NFA RegExp:
