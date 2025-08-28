@@ -3,7 +3,7 @@
 // Copyright (C) 2017 by Steven T. Smith <steve dot t dot smith at gmail dot com>, GPL
 // https://github.com/essandess/easylist-pac-privoxy/
 //
-// PAC file created on Wed, 27 Aug 2025 01:25:20 GMT
+// PAC file created on Thu, 28 Aug 2025 01:24:35 GMT
 // Created with command: easylist_pac.py -d . -moff
 //
 // http://www.gnu.org/licenses/lgpl.txt
@@ -608,6 +608,7 @@ var bad_da_host_exact_JSON = { "api.facebook.com": null,
 "backstory.ebay.": null,
 "client.rum.": null,
 "adservice.google.": null,
+"18wosx.ru": null,
 "46rtpw.ru": null,
 "6dp0i7.ru": null,
 "adcontroll.com": null,
@@ -632,6 +633,7 @@ var bad_da_host_exact_JSON = { "api.facebook.com": null,
 "bluekai.com": null,
 "blueoyster.click": null,
 "bonne-terre-data-layer.com": null,
+"bonuscake.ru": null,
 "bounceexchange.com": null,
 "broadstreet.ai": null,
 "bx-cloud.com": null,
@@ -2807,6 +2809,7 @@ var bad_da_host_exact_JSON = { "api.facebook.com": null,
 "l.ooyala.com": null,
 "l.player.ooyala.com": null,
 "l.sharethis.com": null,
+"launch-analytics-plugin.launchpotato.com": null,
 "leadtracking.plumvoice.com": null,
 "lit.connatix.com": null,
 "literally-analytics.appspot.com": null,
@@ -4134,6 +4137,7 @@ var bad_da_host_exact_JSON = { "api.facebook.com": null,
 "smetrics.couponcabin.com": null,
 "smetrics.ralphlauren.com": null,
 "smetrics.vanguard.com": null,
+"sp.justwatch.com": null,
 "sp.pcoptimum.ca": null,
 "spectrum.gettyimages.com": null,
 "srtb.msn.com": null,
@@ -4271,11 +4275,7 @@ var bad_da_host_exact_JSON = { "api.facebook.com": null,
 "9l3cr6dvk2kb.adaptive.marketing": null,
 "9uim1pc4ej4n.ru.themoneytizer.com": null,
 "b536mpmxoqxa.www.themoneytizer.com": null,
-"cqsecshf4rd9.www.tracktheta.com": null,
-"f02b61sgc617.es.themoneytizer.com": null,
-"hht8m6w8mnug.quine.sh": null,
-"ia84berzxy7v.de.themoneytizer.com": null,
-"iwl2d7pa4yx1.www.logology.co": null };
+"cqsecshf4rd9.www.tracktheta.com": null };
 var bad_da_host_exact_flag = 3999 > 0 ? true : false;  // test for non-zero number of rules
     
 // 6 rules as an efficient NFA RegExp:
