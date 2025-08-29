@@ -3,7 +3,7 @@
 // Copyright (C) 2017 by Steven T. Smith <steve dot t dot smith at gmail dot com>, GPL
 // https://github.com/essandess/easylist-pac-privoxy/
 //
-// PAC file created on Thu, 28 Aug 2025 01:24:35 GMT
+// PAC file created on Fri, 29 Aug 2025 01:25:00 GMT
 // Created with command: easylist_pac.py -d . -moff
 //
 // http://www.gnu.org/licenses/lgpl.txt
@@ -2370,6 +2370,7 @@ var bad_da_host_exact_JSON = { "api.facebook.com": null,
 "tracker.stats.in.th": null,
 "elmasistatistik.com.tr": null,
 "onlinewebstat.com": null,
+"pixad.com.tr": null,
 "sitetistik.com": null,
 "mediatraffic.com.ua": null,
 "mycounter.com.ua": null,
@@ -3972,6 +3973,7 @@ var bad_da_host_exact_JSON = { "api.facebook.com": null,
 "cnt.vivatube.com": null,
 "collect.klove.com": null,
 "collect.reagroupdata.com.au": null,
+"collection.mola.tv": null,
 "confiant.msn.com": null,
 "console-telemetry.oci.oraclecloud.com": null,
 "copilot-telemetry.githubusercontent.com": null,
@@ -4273,9 +4275,7 @@ var bad_da_host_exact_JSON = { "api.facebook.com": null,
 "9b5gjkrnw71r.it.themoneytizer.com": null,
 "9kkjfywjz50v.www.eventus.io": null,
 "9l3cr6dvk2kb.adaptive.marketing": null,
-"9uim1pc4ej4n.ru.themoneytizer.com": null,
-"b536mpmxoqxa.www.themoneytizer.com": null,
-"cqsecshf4rd9.www.tracktheta.com": null };
+"9uim1pc4ej4n.ru.themoneytizer.com": null };
 var bad_da_host_exact_flag = 3999 > 0 ? true : false;  // test for non-zero number of rules
     
 // 6 rules as an efficient NFA RegExp:
