@@ -3,7 +3,7 @@
 // Copyright (C) 2017 by Steven T. Smith <steve dot t dot smith at gmail dot com>, GPL
 // https://github.com/essandess/easylist-pac-privoxy/
 //
-// PAC file created on Sun, 19 Oct 2025 01:41:37 GMT
+// PAC file created on Mon, 20 Oct 2025 01:39:38 GMT
 // Created with command: easylist_pac.py -d . -moff
 //
 // http://www.gnu.org/licenses/lgpl.txt
