@@ -3,7 +3,7 @@
 // Copyright (C) 2017 by Steven T. Smith <steve dot t dot smith at gmail dot com>, GPL
 // https://github.com/essandess/easylist-pac-privoxy/
 //
-// PAC file created on Thu, 13 Nov 2025 01:38:36 GMT
+// PAC file created on Fri, 14 Nov 2025 01:38:08 GMT
 // Created with command: easylist_pac.py -d . -moff
 //
 // http://www.gnu.org/licenses/lgpl.txt
@@ -1812,6 +1812,7 @@ var bad_da_host_exact_JSON = { "api.facebook.com": null,
 "chairscrack.com": null,
 "channelcamp.com": null,
 "chargecracker.com": null,
+"cloudchickens.com": null,
 "cloudguppy.com": null,
 "cloudhustles.com": null,
 "cloudjumbo.com": null,
@@ -1826,6 +1827,7 @@ var bad_da_host_exact_JSON = { "api.facebook.com": null,
 "desirebucket.com": null,
 "detourgame.com": null,
 "dollardelta.com": null,
+"dollarthrill.com": null,
 "dyecloud.com": null,
 "echoacloud.com": null,
 "encouragingthread.com": null,
@@ -4273,9 +4275,7 @@ var bad_da_host_exact_JSON = { "api.facebook.com": null,
 "track.eurogirlsescort.com": null,
 "track.iegcom.com": null,
 "track.kueez.com": null,
-"track.mrgugu.com": null,
-"track.netzero.net": null,
-"track.sodapdf.com": null };
+"track.mrgugu.com": null };
 var bad_da_host_exact_flag = 3999 > 0 ? true : false;  // test for non-zero number of rules
     
 // 6 rules as an efficient NFA RegExp:
