@@ -3,7 +3,7 @@
 // Copyright (C) 2017 by Steven T. Smith <steve dot t dot smith at gmail dot com>, GPL
 // https://github.com/essandess/easylist-pac-privoxy/
 //
-// PAC file created on Sat, 15 Nov 2025 01:26:45 GMT
+// PAC file created on Sun, 16 Nov 2025 01:42:34 GMT
 // Created with command: easylist_pac.py -d . -moff
 //
 // http://www.gnu.org/licenses/lgpl.txt
@@ -2601,6 +2601,7 @@ var bad_da_host_exact_JSON = { "api.facebook.com": null,
 "app.adjust.com": null,
 "applets.ebxcdn.com": null,
 "apps-pbd.ctraffic.io": null,
+"assets.9gtb.com": null,
 "attributiontrackingga.googlecode.com": null,
 "audience.newscgp.com": null,
 "audit.median.hu": null,
@@ -2770,6 +2771,7 @@ var bad_da_host_exact_JSON = { "api.facebook.com": null,
 "eventlog.chatlead.com": null,
 "eventlog.inspsearchapi.com": null,
 "events-endpoint.pointandplace.com": null,
+"events-ocu.zipify.com": null,
 "events-proxy.mintlify.com": null,
 "events.air.tv": null,
 "events.api.secureserver.net": null,
@@ -2972,6 +2974,7 @@ var bad_da_host_exact_JSON = { "api.facebook.com": null,
 "pixel.sprinklr.com": null,
 "pixel.veritone-ce.com": null,
 "pixel.videohub.tv": null,
+"pixel.wetracked.io": null,
 "pixel.wp.com": null,
 "pixel.yabidos.com": null,
 "pixel.yola.com": null,
@@ -4272,10 +4275,7 @@ var bad_da_host_exact_JSON = { "api.facebook.com": null,
 "track-visit.monday.com": null,
 "track.americansongwriter.com": null,
 "track.bestpornsites.tv": null,
-"track.dictionary.com": null,
-"track.eurogirlsescort.com": null,
-"track.iegcom.com": null,
-"track.kueez.com": null };
+"track.dictionary.com": null };
 var bad_da_host_exact_flag = 3999 > 0 ? true : false;  // test for non-zero number of rules
     
 // 6 rules as an efficient NFA RegExp:
