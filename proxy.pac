@@ -3,7 +3,7 @@
 // Copyright (C) 2017 by Steven T. Smith <steve dot t dot smith at gmail dot com>, GPL
 // https://github.com/essandess/easylist-pac-privoxy/
 //
-// PAC file created on Sun, 14 Dec 2025 01:49:18 GMT
+// PAC file created on Mon, 15 Dec 2025 01:46:47 GMT
 // Created with command: easylist_pac.py -d . -moff
 //
 // http://www.gnu.org/licenses/lgpl.txt
@@ -2263,7 +2263,9 @@ var bad_da_host_exact_JSON = { "api.facebook.com": null,
 "smart-counter.net": null,
 "smartnews-ads.com": null,
 "speee-ad.jp": null,
+"tag.contentanalytics.jp": null,
 "talpa-analytics.com": null,
+"track.robee.tech": null,
 "trackfeed.com": null,
 "zerostats.com": null,
 "adpick.co.kr": null,
@@ -3339,6 +3341,7 @@ var bad_da_host_exact_JSON = { "api.facebook.com": null,
 "userexperience.thehut.net": null,
 "v.shopify.com": null,
 "validate.onecount.net": null,
+"vault.gostatera.com": null,
 "video-ad-stats.googlesyndication.com": null,
 "video-analytics-api.cloudinary.com": null,
 "video-intel.pixels.ai": null,
@@ -4272,10 +4275,7 @@ var bad_da_host_exact_JSON = { "api.facebook.com": null,
 "streamstats.prd.dlive.tv": null,
 "t.dailymail.co.uk": null,
 "t.freelancer.com": null,
-"tags.klove.com": null,
-"tao.barstoolsports.com": null,
-"tc.geniusmonkey.com": null,
-"telemetry.adobe.io": null };
+"tags.klove.com": null };
 var bad_da_host_exact_flag = 3999 > 0 ? true : false;  // test for non-zero number of rules
     
 // 6 rules as an efficient NFA RegExp:
