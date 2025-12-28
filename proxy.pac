@@ -3,7 +3,7 @@
 // Copyright (C) 2017 by Steven T. Smith <steve dot t dot smith at gmail dot com>, GPL
 // https://github.com/essandess/easylist-pac-privoxy/
 //
-// PAC file created on Sat, 27 Dec 2025 01:41:26 GMT
+// PAC file created on Sun, 28 Dec 2025 01:54:06 GMT
 // Created with command: easylist_pac.py -d . -moff
 //
 // http://www.gnu.org/licenses/lgpl.txt
@@ -1876,6 +1876,7 @@ var bad_da_host_exact_JSON = { "api.facebook.com": null,
 "jamexport.com": null,
 "joyouspool.com": null,
 "joyoussurprise.com": null,
+"lazyexplore.com": null,
 "loadsurprise.com": null,
 "logoshutter.com": null,
 "lovelydrum.com": null,
@@ -3599,6 +3600,7 @@ var bad_da_host_exact_JSON = { "api.facebook.com": null,
 "tracking.s24.com": null,
 "tracking.srv2.de": null,
 "tracking.webtradecenter.com": null,
+"traffic.askrella.de": null,
 "webcounter.goweb.de": null,
 "x.bloggurat.net": null,
 "affiliation.planethoster.info": null,
@@ -4273,9 +4275,7 @@ var bad_da_host_exact_JSON = { "api.facebook.com": null,
 "stats.synedat.io": null,
 "stats.trimbles.ie": null,
 "stats.vidbinge.com": null,
-"stats.videasy.net": null,
-"stats.vk-portal.net": null,
-"stats.wordpress.com": null };
+"stats.videasy.net": null };
 var bad_da_host_exact_flag = 3999 > 0 ? true : false;  // test for non-zero number of rules
     
 // 6 rules as an efficient NFA RegExp:
