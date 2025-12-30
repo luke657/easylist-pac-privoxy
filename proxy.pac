@@ -3,7 +3,7 @@
 // Copyright (C) 2017 by Steven T. Smith <steve dot t dot smith at gmail dot com>, GPL
 // https://github.com/essandess/easylist-pac-privoxy/
 //
-// PAC file created on Mon, 29 Dec 2025 01:52:14 GMT
+// PAC file created on Tue, 30 Dec 2025 01:44:35 GMT
 // Created with command: easylist_pac.py -d . -moff
 //
 // http://www.gnu.org/licenses/lgpl.txt
@@ -2997,6 +2997,7 @@ var bad_da_host_exact_JSON = { "api.facebook.com": null,
 "pixel.sprinklr.com": null,
 "pixel.veritone-ce.com": null,
 "pixel.videohub.tv": null,
+"pixel.visitiq.io": null,
 "pixel.wetracked.io": null,
 "pixel.wp.com": null,
 "pixel.yabidos.com": null,
@@ -4274,8 +4275,7 @@ var bad_da_host_exact_JSON = { "api.facebook.com": null,
 "stats.ibtimes.co.in": null,
 "stats.ibtimes.sg": null,
 "stats.justpaste.it": null,
-"stats.mempool.space": null,
-"stats.newsweek.com": null };
+"stats.mempool.space": null };
 var bad_da_host_exact_flag = 3999 > 0 ? true : false;  // test for non-zero number of rules
     
 // 6 rules as an efficient NFA RegExp:
