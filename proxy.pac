@@ -3,7 +3,7 @@
 // Copyright (C) 2017 by Steven T. Smith <steve dot t dot smith at gmail dot com>, GPL
 // https://github.com/essandess/easylist-pac-privoxy/
 //
-// PAC file created on Tue, 06 Jan 2026 01:46:32 GMT
+// PAC file created on Wed, 07 Jan 2026 01:46:10 GMT
 // Created with command: easylist_pac.py -d . -moff
 //
 // http://www.gnu.org/licenses/lgpl.txt
@@ -2489,6 +2489,7 @@ var bad_da_host_exact_JSON = { "api.facebook.com": null,
 "analytics.aweber.com": null,
 "analytics.bestreviews.com": null,
 "analytics.bitrix.info": null,
+"analytics.bomiv.com": null,
 "analytics.carambo.la": null,
 "analytics.carbaselive.com": null,
 "analytics.chegg.com": null,
@@ -3199,6 +3200,7 @@ var bad_da_host_exact_JSON = { "api.facebook.com": null,
 "track.91app.io": null,
 "track.atgstores.com": null,
 "track.bannedcelebs.com": null,
+"track.bomiv.com": null,
 "track.btdmp.com": null,
 "track.coherentpath.com": null,
 "track.contently.com": null,
@@ -4273,9 +4275,7 @@ var bad_da_host_exact_JSON = { "api.facebook.com": null,
 "stats.codeur.com": null,
 "stats.darkreader.app": null,
 "stats.davidickedelivery.com": null,
-"stats.gateio.ch": null,
-"stats.habr.com": null,
-"stats.hexa.watch": null };
+"stats.gateio.ch": null };
 var bad_da_host_exact_flag = 3999 > 0 ? true : false;  // test for non-zero number of rules
     
 // 6 rules as an efficient NFA RegExp:
