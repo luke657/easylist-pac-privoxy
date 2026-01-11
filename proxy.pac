@@ -3,7 +3,7 @@
 // Copyright (C) 2017 by Steven T. Smith <steve dot t dot smith at gmail dot com>, GPL
 // https://github.com/essandess/easylist-pac-privoxy/
 //
-// PAC file created on Sat, 10 Jan 2026 01:43:34 GMT
+// PAC file created on Sun, 11 Jan 2026 01:55:18 GMT
 // Created with command: easylist_pac.py -d . -moff
 //
 // http://www.gnu.org/licenses/lgpl.txt
@@ -1299,6 +1299,7 @@ var bad_da_host_exact_JSON = { "api.facebook.com": null,
 "matomo.cloud": null,
 "maxtracker.net": null,
 "mbotvisit.com": null,
+"media.net": null,
 "media01.eu": null,
 "mediaarmor.com": null,
 "mediaforgews.com": null,
@@ -1687,6 +1688,7 @@ var bad_da_host_exact_JSON = { "api.facebook.com": null,
 "visitstreamer.com": null,
 "vtracker.net": null,
 "w3counter.com": null,
+"wandzcdn.com": null,
 "waplog.net": null,
 "we-stats.com": null,
 "web-counter.net": null,
@@ -2548,6 +2550,7 @@ var bad_da_host_exact_JSON = { "api.facebook.com": null,
 "analytics.mlstatic.com": null,
 "analytics.myfidevs.io": null,
 "analytics.myfinance.com": null,
+"analytics.netronline.dev": null,
 "analytics.newscred.com": null,
 "analytics.onlyonlinemarketing.com": null,
 "analytics.optilead.co.uk": null,
@@ -2732,6 +2735,7 @@ var bad_da_host_exact_JSON = { "api.facebook.com": null,
 "counter.top.ge": null,
 "counter.yadro.ru": null,
 "counters.freewebs.com": null,
+"cp.filext.com": null,
 "cp.official-deals.co.uk": null,
 "crta.dailymail.co.uk": null,
 "cs.media.net": null,
@@ -3235,6 +3239,7 @@ var bad_da_host_exact_JSON = { "api.facebook.com": null,
 "track.yfret.com": null,
 "track.yieldsoftware.com": null,
 "track.zappos.com": null,
+"track1.avplayer.com": null,
 "tracker-dot-optimeeze.appspot.com": null,
 "tracker-server.high-cdn.com": null,
 "tracker-v4.gamedock.io": null,
@@ -4270,12 +4275,7 @@ var bad_da_host_exact_JSON = { "api.facebook.com": null,
 "statistics.streamdav.com": null,
 "stats.aerotime.aero": null,
 "stats.allenai.org": null,
-"stats.calcalist.co.il": null,
-"stats.chromatone.center": null,
-"stats.codeur.com": null,
-"stats.darkreader.app": null,
-"stats.davidickedelivery.com": null,
-"stats.gateio.ch": null };
+"stats.calcalist.co.il": null };
 var bad_da_host_exact_flag = 3999 > 0 ? true : false;  // test for non-zero number of rules
     
 // 6 rules as an efficient NFA RegExp:
