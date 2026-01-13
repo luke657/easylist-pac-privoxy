@@ -3,7 +3,7 @@
 // Copyright (C) 2017 by Steven T. Smith <steve dot t dot smith at gmail dot com>, GPL
 // https://github.com/essandess/easylist-pac-privoxy/
 //
-// PAC file created on Mon, 12 Jan 2026 01:51:55 GMT
+// PAC file created on Tue, 13 Jan 2026 01:43:22 GMT
 // Created with command: easylist_pac.py -d . -moff
 //
 // http://www.gnu.org/licenses/lgpl.txt
@@ -306,6 +306,7 @@ var bad_da_host_exact_JSON = { "api.facebook.com": null,
 "flipcard.bridged.media": null,
 "fluidsurveys.com": null,
 "freetellafriend.com": null,
+"gameball.co": null,
 "getmailcounter.com": null,
 "informvisitors.com": null,
 "letsgetsocialnow.com": null,
@@ -1072,6 +1073,7 @@ var bad_da_host_exact_JSON = { "api.facebook.com": null,
 "easy-hit-counters.com": null,
 "easycounter.com": null,
 "easyhitcounters.com": null,
+"eazydata.io": null,
 "ec-track.com": null,
 "ecommstats.com": null,
 "edigitalsurvey.com": null,
@@ -2887,6 +2889,7 @@ var bad_da_host_exact_JSON = { "api.facebook.com": null,
 "l.player.ooyala.com": null,
 "l.sharethis.com": null,
 "launch-analytics-plugin.launchpotato.com": null,
+"leads.whatboxdigital.com": null,
 "leadtracking.plumvoice.com": null,
 "lit.connatix.com": null,
 "literally-analytics.appspot.com": null,
@@ -4272,10 +4275,7 @@ var bad_da_host_exact_JSON = { "api.facebook.com": null,
 "stat.turb.pw": null,
 "stat.vulkanvegas.com": null,
 "statistics.darkreader.app": null,
-"statistics.streamdav.com": null,
-"stats.aerotime.aero": null,
-"stats.allenai.org": null,
-"stats.calcalist.co.il": null };
+"statistics.streamdav.com": null };
 var bad_da_host_exact_flag = 3999 > 0 ? true : false;  // test for non-zero number of rules
     
 // 6 rules as an efficient NFA RegExp:
